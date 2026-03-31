@@ -1,56 +1,71 @@
 #include <stdio.h>
 
+// 🔷 TORRE (recursiva)
+void moverTorre(int casas) {
+    if (casas == 0) return;
+
+    printf("Direita\n");
+    moverTorre(casas - 1);
+}
+
+// 🔷 RAINHA (recursiva)
+void moverRainha(int casas) {
+    if (casas == 0) return;
+
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+// 🔷 BISPO (recursivo + loop aninhado)
+void moverBispo(int casas) {
+    if (casas == 0) return;
+
+    // loop aninhado (simulação da diagonal)
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Cima + Direita\n");
+        }
+    }
+
+    moverBispo(casas - 1);
+}
+
 int main() {
 
-    int i, j;
+    printf("=== DESAFIO FINAL XADREZ ===\n\n");
 
-    printf("=== DESAFIO XADREZ ===\n\n");
-
-    // 🔷 TORRE - 5 casas para a direita (WHILE)
+    // 🔷 TORRE
     printf("Torre (5 casas para a direita):\n");
-    i = 0;
-    while (i < 5) {
-        printf("Direita\n");
-        i++;
-    }
+    moverTorre(5);
 
     printf("\n");
 
-    // 🔷 BISPO - 5 casas na diagonal (FOR)
+    // 🔷 BISPO
     printf("Bispo (5 casas na diagonal superior direita):\n");
-    for (i = 0; i < 5; i++) {
-        printf("Cima + Direita\n");
-    }
+    moverBispo(5);
 
     printf("\n");
 
-    // 🔷 RAINHA - 8 casas para a esquerda (DO-WHILE)
+    // 🔷 RAINHA
     printf("Rainha (8 casas para a esquerda):\n");
-    i = 0;
-    do {
-        printf("Esquerda\n");
-        i++;
-    } while (i < 8);
+    moverRainha(8);
 
     printf("\n");
 
-    // ♞ CAVALO - movimento em L (loops aninhados)
+    // ♞ CAVALO (loops com múltiplas variáveis + break/continue)
     printf("Cavalo (movimento em L: 2 Cima + 1 Direita):\n");
 
-    for (i = 0; i < 1; i++) { // controle do movimento
+    for (int i = 0, j = 0; i < 3; i++) {
 
-        // 2 casas para cima
-        for (j = 0; j < 2; j++) {
-            printf("Cima\n");
-        }
-
-        // 1 casa para direita
-        for (j = 0; j < 1; j++) {
+        if (i == 2) {
             printf("Direita\n");
+            continue;
         }
-    }
 
-    printf("\n");
+        if (i > 2) break;
+
+        printf("Cima\n");
+    }
 
     return 0;
 }
